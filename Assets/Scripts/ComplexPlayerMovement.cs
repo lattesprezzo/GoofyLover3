@@ -31,10 +31,8 @@ public class ComplexPlayerMovement : MonoBehaviour
     [SerializeField]
     float _inputLookY;
     public Vector2 input_move;
-
     public bool jump;
     public bool sprint;
-
 
     [Header("-------- Player --------")]
     [Space(10)]
