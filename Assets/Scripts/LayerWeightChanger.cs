@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,12 +10,33 @@ public class LayerWeightChanger : MonoBehaviour
     public int layerIndex;
     public float targetWeight;
     public float duration;
+    bool coroutineHasStarted;
 
     Coroutine tiredWalkCoroutine;
+    [SerializeField]
+    ThirdPersonController sprintValue;
+
+    private void OnEnable()
+    {
+   
+        if (sprintValue._speed == 4) { 
+
+        }
+        
+    }
 
     void Start()
     {
-
+     
+    }
+    private void Update()
+    {
+        if(sprintValue._speed == 4 && !coroutineHasStarted)
+        {
+           StartCoroutine(ChangeLayerWeight(layerIndex));
+            coroutineHasStarted = true;
+            Debug.Log("Getting tired");
+        }
     }
 
     IEnumerator ChangeLayerWeight(float targetWeight)
@@ -29,6 +51,7 @@ public class LayerWeightChanger : MonoBehaviour
             yield return null;
 
         }
+        coroutineHasStarted = false;
         animator.SetLayerWeight(layerIndex, targetWeight);
 
     }
