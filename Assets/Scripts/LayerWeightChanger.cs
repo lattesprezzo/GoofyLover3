@@ -16,14 +16,7 @@ public class LayerWeightChanger : MonoBehaviour
     [SerializeField]
     ThirdPersonController sprintValue;
 
-    private void OnEnable()
-    {
-   
-        if (sprintValue._speed == 4) { 
 
-        }
-        
-    }
 
     void Start()
     {
@@ -33,12 +26,20 @@ public class LayerWeightChanger : MonoBehaviour
     {
         if(sprintValue._speed == 4 && !coroutineHasStarted)
         {
-           StartCoroutine(ChangeLayerWeight(layerIndex));
+            StopCoroutine(ChangeLayerWeight(1));
+            layerIndex = 1;
+           StartCoroutine(ChangeLayerWeight(1));
             coroutineHasStarted = true;
             Debug.Log("Getting tired");
         }
+        if(sprintValue._speed == 0)
+        {
+            StopCoroutine(ChangeLayerWeight(1));
+            layerIndex = 0;
+            StartCoroutine(ChangeLayerWeight(1));
+            Debug.Log("Feeling Goofy again");
+        }
     }
-
     IEnumerator ChangeLayerWeight(float targetWeight)
     {
         float startTime = Time.time;
@@ -46,7 +47,7 @@ public class LayerWeightChanger : MonoBehaviour
         while (Time.time < startTime + duration)
         {
             float t = (Time.time - startTime) / duration;
-            float newWeight = Mathf.Lerp(startWeight, targetWeight, t); 
+            float newWeight = Mathf.Lerp(startWeight, targetWeight, t);
             animator.SetLayerWeight(layerIndex, newWeight);
             yield return null;
 
@@ -55,4 +56,20 @@ public class LayerWeightChanger : MonoBehaviour
         animator.SetLayerWeight(layerIndex, targetWeight);
 
     }
+    //IEnumerator ChangeLayerWeight(float targetWeight)
+    //{
+    //    float startTime = Time.time;
+    //    float startWeight = animator.GetLayerWeight(layerIndex);
+    //    while (Time.time < startTime + duration)
+    //    {
+    //        float t = (Time.time - startTime) / duration;
+    //        float newWeight = Mathf.Lerp(startWeight, targetWeight, t); 
+    //        animator.SetLayerWeight(layerIndex, newWeight);
+    //        yield return null;
+
+    //    }
+    //    coroutineHasStarted = false;
+    //    animator.SetLayerWeight(layerIndex, targetWeight);
+
+    //}
 }
