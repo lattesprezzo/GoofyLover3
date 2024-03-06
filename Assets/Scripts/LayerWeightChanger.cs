@@ -1,7 +1,5 @@
 using StarterAssets;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LayerWeightChanger : MonoBehaviour
@@ -11,45 +9,60 @@ public class LayerWeightChanger : MonoBehaviour
     public float targetWeight;
     public float weightValue;
     public float newWeight;
- 
-    public float duration;
+
+
     bool BlendStarted;
 
     Coroutine tiredWalkCoroutine;
     [SerializeField]
     ThirdPersonController sprintValue;
 
+    float t = 0;
+    float duration = 2.0f;
+
 
 
     void Start()
     {
-     weightValue = 0f;  
+        weightValue = 0f;
     }
     private void Update()
     {
-        if(sprintValue._speed == 4 && !BlendStarted)
+        if (sprintValue._speed == 4 && !BlendStarted)
         {
-            targetWeight = 1;
-            newWeight = Mathf.Lerp(0, targetWeight, 3f);
+            if (t < 1)
+            {
+                t += Time.deltaTime / duration;
+                targetWeight = 1;
+                //newWeight += 0.05f;
+                newWeight = Mathf.Lerp(0, targetWeight, t);
+                Debug.Log(newWeight);
 
-            animator.SetLayerWeight(0, newWeight);
-            //StopAllCoroutines();    
-            //layerIndex = 1;
-            //BlendStarted = true;
-            //StartCoroutine(ChangeLayerWeight(1));
+                animator.SetLayerWeight(1, newWeight);
+                //StopAllCoroutines();    
+                //layerIndex = 1;
+                //BlendStarted = true;
+                //StartCoroutine(ChangeLayerWeight(1));
 
-            Debug.Log("Getting tired");
+                Debug.Log("Getting tired");
+
+            }
         }
-        if(sprintValue._speed == 0)
+        if (sprintValue._speed == 0)
         {
-            targetWeight = 0;
-            newWeight = Mathf.Lerp(1, targetWeight, 3f);
-            animator.SetLayerWeight(1,newWeight);
-            //StopAllCoroutines();
-            ////layerIndex = 0;
+            if (t > 0)
+            {
+                t-= Time.deltaTime / duration;  
 
-            //StartCoroutine(ChangeLayerWeight(0));
-            Debug.Log("Feeling Goofy again");
+                targetWeight = 0;
+                newWeight = Mathf.Lerp(1, targetWeight, t);
+                animator.SetLayerWeight(1, 0);
+                //StopAllCoroutines();
+                ////layerIndex = 0;
+
+                //StartCoroutine(ChangeLayerWeight(0));
+                Debug.Log("Feeling Goofy again");
+            }
         }
     }
     void ChangeLayerWeights(float targetWeight)
@@ -61,14 +74,14 @@ public class LayerWeightChanger : MonoBehaviour
             float t = (Time.time - startTime) / duration;
             float newWeight = Mathf.Lerp(startWeight, targetWeight, 10f);
             animator.SetLayerWeight(layerIndex, newWeight);
-            if(newWeight==targetWeight)
+            if (newWeight == targetWeight)
             {
                 BlendStarted = false;
-                break;  
+                break;
             }
 
         }
-        
+
 
 
     }
