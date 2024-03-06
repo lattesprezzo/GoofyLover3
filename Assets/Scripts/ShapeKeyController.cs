@@ -10,6 +10,7 @@ public class ShapeKeyController : MonoBehaviour
 
     private int shapeKeyIndex;
     private float t = 0;
+    public float value;
 
 
 
@@ -21,6 +22,8 @@ public class ShapeKeyController : MonoBehaviour
 
     void Update()
     {
-        skinnedMeshRenderer.SetBlendShapeWeight(shapeKeyIndex, 1);
+        t += Time.deltaTime * shapeSpeed;
+        value = (Mathf.Sin(t) + 1) / 2;
+        skinnedMeshRenderer.SetBlendShapeWeight(shapeKeyIndex, value * 100);
     }
 }
