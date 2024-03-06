@@ -23,7 +23,7 @@ public class ShapeKeyController : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime * shapeSpeed;
-        value = (Mathf.Sin(t) + 1) / 2;
+        value = (Mathf.Sin(t) + 1) / 2; // Veivaa edestakaisin 0 ja 1 välillä.
         skinnedMeshRenderer.SetBlendShapeWeight(shapeKeyIndex, value * 100);
     }
 }

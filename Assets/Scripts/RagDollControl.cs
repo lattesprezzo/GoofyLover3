@@ -1,11 +1,15 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using Cinemachine;
 
 public class RagDollControl : MonoBehaviour
 {
     private Animator _animator;
     private Rigidbody[] _ragdollRigidbodies;
     private CharacterController _characterController;
+    public Camera GoofyCamera;
+    public CinemachineVirtualCamera ThirdPersonCamera;
+    public CinemachineVirtualCamera RagdollCamera;
 
     Vector3 pushDirection;
     public float pushForce;
@@ -19,7 +23,7 @@ public class RagDollControl : MonoBehaviour
     }
     void Start()
     {
-
+        RagdollCamera.gameObject.SetActive(false);
     }
     private void DisableRagdoll()
     {
@@ -56,6 +60,10 @@ public class RagDollControl : MonoBehaviour
         {
             EnableRagdoll();
             Pusher();
+            ThirdPersonCamera.gameObject.SetActive(false);
+            RagdollCamera.gameObject.SetActive(true);
+
+            //GoofyCamera.gameObject.SetActive(true);
             gameObject.SetActive(false);
             gameObject.SetActive(true);
         }
