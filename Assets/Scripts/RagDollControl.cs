@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class RagDollControl : MonoBehaviour
@@ -6,6 +7,8 @@ public class RagDollControl : MonoBehaviour
     private Rigidbody[] _ragdollRigidbodies;
     private CharacterController _characterController;
 
+    Vector3 pushDirection;
+    public float pushForce;
 
     private void Awake()
     {
@@ -37,12 +40,22 @@ public class RagDollControl : MonoBehaviour
         _characterController.enabled = false;
     }
 
+    void Pusher() {
+
+        Vector3 pushDirection = Vector3.up;
+       
+        pushDirection.Normalize();
+        _characterController.Move(pushDirection * pushForce * Time.deltaTime);
+
+    }
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.gameObject.CompareTag("RagDollActivator"))
         {
             EnableRagdoll();
+            Pusher();
             gameObject.SetActive(false);
             gameObject.SetActive(true);
         }
