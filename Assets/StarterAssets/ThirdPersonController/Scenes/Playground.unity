@@ -190,8 +190,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9215519}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7009092, y: -0.00000083016573, z: 0.00000081580134, w: 0.7132506}
-  m_LocalPosition: {x: -0.76465625, y: 11.999577, z: 2.5855699}
+  m_LocalRotation: {x: 0.7009092, y: 0.00000014669102, z: -0.00000014415278, w: 0.7132506}
+  m_LocalPosition: {x: -0.7646567, y: 11.999577, z: 2.5855699}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawlinecolor: {r: 0, g: 0, b: 0, a: 0}
   drawlinetime: 0
-  lineRenderer: {fileID: 1481554540}
+  lineRenderer: {fileID: 22745854}
   position1: {fileID: 22745853}
   position2: {fileID: 937809458}
   rotation1: 0
@@ -364,6 +364,9 @@ MonoBehaviour:
   HitLayerName: 
   HitLayerList:
   - Enemy
+  animator: {fileID: 0}
+  weightValue: 0
+  animationLayer: 0
 --- !u!135 &22745856
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4291,7 +4294,7 @@ Transform:
   m_GameObject: {fileID: 937809457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.038, y: 1.136, z: 2.442}
+  m_LocalPosition: {x: 0.038, y: 1.136, z: 2.705}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5573,7 +5576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawlinecolor: {r: 0, g: 0, b: 0, a: 0}
   drawlinetime: 0
-  lineRenderer: {fileID: 1481554540}
+  lineRenderer: {fileID: 1262075042}
   position1: {fileID: 1262075037}
   position2: {fileID: 1895788427}
   rotation1: 0
@@ -5585,6 +5588,9 @@ MonoBehaviour:
   HitLayerName: 
   HitLayerList:
   - Stairs
+  animator: {fileID: 1762682266}
+  weightValue: 0
+  animationLayer: 0
 --- !u!120 &1262075042
 LineRenderer:
   serializedVersion: 2
@@ -6248,7 +6254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1481554539
 Transform:
   m_ObjectHideFlags: 0
@@ -6272,7 +6278,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481554538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8243,6 +8249,9 @@ MonoBehaviour:
     m_Bits: 1
   HitLayerName: 
   HitLayerList: []
+  animator: {fileID: 1762682266}
+  weightValue: 0
+  animationLayer: 1
 --- !u!4 &1763665505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5073361061165769244, guid: 29cf05c2a0a8d7f4e832a6b67e0dbe12,

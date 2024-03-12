@@ -21,6 +21,11 @@ public class EnvironmentScanner : MonoBehaviour
 
     [SerializeField] List<string> HitLayerList = new();
 
+    public Animator animator;
+    public float weightValue;
+    public int animationLayer;
+
+
     void RayCastController()
     {
         //Vector3 direction = (position2.position - transform.position).normalized;
@@ -44,12 +49,28 @@ public class EnvironmentScanner : MonoBehaviour
             Debug.Log("Hit object's layer: " + hitLayerName);
             // gameObject.SetActive(false);    
 
-           // LineRendererController();
+           LineRendererController();
+            animationLayer = 1;
+            weightValue = 1;
+            AnimationLayerController(animationLayer, weightValue);     
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+            animationLayer = 1;
+            weightValue = 0;
+            AnimationLayerController(animationLayer, weightValue);    
         }
 
     }
+
+    void AnimationLayerController(int layer, float value)
+    {
+        if(animator)        animator.SetLayerWeight(layer, value);
+    }
     void LineRendererController()
     {
+        lineRenderer.enabled = true;    
         lineRenderer.SetPosition(0, position1.position);
       //  transform.rotation = Quaternion.Euler(rotation1, 0, 0);
         lineRenderer.SetPosition(1, position2.position);   
@@ -57,7 +78,7 @@ public class EnvironmentScanner : MonoBehaviour
 
     void Start()
     {
-        lineRenderer.gameObject.SetActive(false);
+        lineRenderer.enabled = false;
     }
 
 
